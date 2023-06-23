@@ -26,7 +26,7 @@ let App = new Vue({
                 .then((data) => {
                     this.buchungen = data.buchungen;
                 })
-            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg2/Auswahl.php")
+            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Auswahl.php")
                 .then(response => {
                     console.log(response);
                     return response.json();
