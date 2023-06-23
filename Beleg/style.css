@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(180deg, rgb(23, 165, 242), rgb(49, 219, 179));
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+.box {
+    padding: 20px;
+    border: 1px solid;
+    background-color: blue;
+
+}
+
+.box2 {
+    padding: 20px;
+    border: 1px solid;
+    background-color: yellow;
+
+}
+
+.box3 {
+    padding: 20px;
+    border: 1px solid;
+    background-color: green;
+
+}
+
+.calendar-form {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgb(90, 78, 78);
+    display: flex;
+    justify-content: space-around;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.calendar-form input {
+    width: 150px;
+}
+
+.btn {
+    background-color:rgb(123, 209, 255)
+}
+.dropdown-item {
+    text-align: center;
+}
+
+.form-control {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+.list-group {
+    background-color: transparent;
+    margin-top: 50px;
+}
+.list-group-item {
+    font-weight: 600;
+    font-size: 20px;
+    border: 0;
+    background-color: transparent;
+    text-align: center;
+}
+
+#admin-email {
+    width: 150px;
+}
+
+.admin-section {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
