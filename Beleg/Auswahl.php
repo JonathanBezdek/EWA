@@ -14,7 +14,7 @@ $db_link->query("SET CHARACTER SET utf8");
 $db_link->query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 // ##########################################################################
  
-$sql = "SELECT * FROM buecher";
+$sql = "SELECT * FROM zimmer";
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
@@ -31,17 +31,10 @@ while ($zeile =  $db_erg->fetch_array( MYSQLI_ASSOC ))
 {
  
 if ($showtable)
- {echo "<tr>";
-  echo "<td>". $zeile['ProduktID'] . "</td>";
-  echo "<td>". $zeile['Produktcode'] . "</td>";
-  echo "<td>". $zeile['Produkttitel'] . "</td>";
-  echo "<td>". $zeile['Autorname'] . "</td>";
-  echo "<td>". $zeile['PreisNetto'] . "</td>";
-  echo "<td>". $zeile['Mwstsatz'] . "</td>";
-  echo "<td>". $zeile['PreisBrutto'] . "</td>";
-  echo "<td>". $zeile['Lagerbestand'] . "</td>";
-  echo "<td>". $zeile['Gewicht'] . "</td>";
-  echo "<td>". $zeile['LinkGrafikdatei'] . "</td>";
+{echo "<tr>";
+  echo "<td>". $zeile['ID'] . "</td>";
+  echo "<td>". $zeile['Name'] . "</td>";
+  echo "<td>". $zeile['Email'] . "</td>";
   echo "</tr>";
   } 
   

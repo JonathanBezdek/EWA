@@ -10,7 +10,7 @@
 
 <body>
     <div id="app">
-
+        zimmer
         <!-- 
             dieses div gibt für jedes buch die Tabelle aus: 
         -->
@@ -18,34 +18,16 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ProduktID</th>
-                        <th>Produktcode</th>
-                        <th>Produkttitel</th>
-                        <th>Autorname</th>
-                        <th>Verlagsname</th>
-                        <th>PreisNetto</th>
-                        <th>Mwstsatz</th>
-                        <th>PreisBrutto</th>
-                        <th>Lagerbestand</th>
-                        <th>Kurzinhalt</th>
-                        <th>Gewicht</th>
-                        <th>LinkGrafikdatei</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="buch in buecher" :key="buch.ProduktID">
-                        <td>{{ buch.ProduktID }}</td>
-                        <td>{{ buch.Produktcode }}</td>
-                        <td>{{ buch.Produkttitel }}</td>
-                        <td>{{ buch.Autorname }}</td>
-                        <td>{{ buch.Verlagsname }}</td>
-                        <td>{{ buch.PreisNetto }}</td>
-                        <td>{{ buch.Mwstsatz }}</td>
-                        <td>{{ buch.PreisBrutto }}</td>
-                        <td>{{ buch.Lagerbestand }}</td>
-                        <td>{{ buch.Kurzinhalt }}</td>
-                        <td>{{ buch.Gewicht }}</td>
-                        <td>{{ buch.LinkGrafikdatei }}</td>
+                    <tr v-for="zimmer in zimmer" :key="zimmer.ID">
+                        <td>{{ zimmer.ID }}</td>
+                        <td>{{ zimmer.Name }}</td>
+                        <td>{{ zimmer.Email }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -2,7 +2,7 @@ let App = new Vue({
     el: '#app',
     data() {
         return {
-            buecher: [], // hier werden die bücher gespeichert
+            zimmer: [], // hier werden die bücher gespeichert
             selected: { id: null, name: "" },
             Anreisedatum: "",
             Abreisedatum: "",
@@ -26,15 +26,15 @@ let App = new Vue({
                 .then((data) => {
                     this.buchungen = data.buchungen;
                 })
-            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Test.php")
+            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg2/Auswahl.php")
                 .then(response => {
                     console.log(response);
                     return response.json();
                 })
                 .then((data) => {
                     console.log(data);
-                    this.buecher = data;
-                    console.log(this.buecher);
+                    this.zimmer = data;
+                    console.log(this.zimmer);
                 });
         },
         greet() {
