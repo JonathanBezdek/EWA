@@ -57,9 +57,10 @@
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle btn btn-primary btn-lg" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ selected.name || 'Zimmer auswählen' }}</button>
+                    {{ selected.Name || 'Zimmer auswählen' }}</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" v-for="room in rooms" @click="selectItem(room)" href="#">{{room.name}}</a>
+                    <a class="dropdown-item" v-for="zimmer in zimmer" @click="selectItem(zimmer)"
+                        href="#">{{zimmer.Name}}</a>
                     <!-- mit v-for mehrere vond en gleichen elemnten erstellen-->
                 </div>
             </div>
@@ -72,13 +73,13 @@
             <li class="list-group-item" v-for="(buchung, index) in buchungen">
                 Anreisedatum: "{{ buchung.anreisedatum }}" ,
                 Abreisedatum: "{{ buchung.abreisedatum }}",
-                E-Mail: "{{ buchung.email }}"
+                E-Mail: "{{ zimmer.Email }}"
             </li>
         </ul>
         <ul class="list-group">
             <li class="list-group-item">
                 Aktuell ausgewählt: (
-                Zimmer: "{{ selected.name }}",
+                Zimmer: "{{ selected.Name }}",
                 Anreisedatum: "{{ Anreisedatum }}" ,
                 Abreisedatum: "{{ Abreisedatum }}",
                 E-Mail: "{{ email }}" )

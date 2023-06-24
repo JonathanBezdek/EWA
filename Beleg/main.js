@@ -12,11 +12,6 @@ let App = new Vue({
             email: "",
             admin_email: "",
             buchungen: [],
-            rooms: [
-                { id: 1, name: 'Penthouse mit Meerblick' },
-                { id: 2, name: 'Zimmer mit Meerblick' },
-                { id: 3, name: 'Normales Zimmer' }
-            ]
         }
     },
     methods: {
@@ -44,10 +39,10 @@ let App = new Vue({
             console.log("Anreisedatum: " + this.Anreisedatum)
             console.log("Abreisedatum: " + this.Abreisedatum)
             console.log("E-Mail: " + this.email)
-            console.log(this.selected.name)
+            console.log(this.selected.Name)
         },
-        selectItem(room) {
-            this.selected = { id: room.id, name: room.name };
+        selectItem(zimmer) {
+            this.selected = zimmer;
         },
         login() {
             console.log(this.admin_email)
