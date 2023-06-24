@@ -46,6 +46,8 @@
             <div class="box3" v-else></div>
         </div>
         -->
+
+
         <div class="admin-section">
             <input id="admin-email" class="form-control" type="email" placeholder="Admin E-Mail" v-model="admin_email">
             <button @click=login() type="submit" class="btn btn-primary btn-lg">Login</button>
@@ -53,21 +55,21 @@
 
         <h1>Hotelzimmer buchen</h1>
 
-        <form class="calendar-form">
+        <form id="myForm" class="calendar-form">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle btn btn-primary btn-lg" type="button"
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ selected.Name || 'Zimmer auswählen' }}</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" v-for="zimmer in zimmer" @click="selectItem(zimmer)"
-                        href="#">{{zimmer.Name}}</a>
+                    <a class="dropdown-item" v-for="zimmer in zimmer" @click="selectItem(zimmer)" href="#">
+                        {{zimmer.Name}}</a>
                     <!-- mit v-for mehrere vond en gleichen elemnten erstellen-->
                 </div>
             </div>
             <input class="form-control" type="date" v-model="Anreisedatum">
             <input class="form-control" type="date" v-model="Abreisedatum">
             <input class="form-control" type="email" placeholder="E-Mail" v-model="email">
-            <button @click=getDate() type="submit" class="btn btn-primary btn-lg">Buchen</button>
+            <button @click="insertData" type="submit" class="btn btn-primary btn-lg">Buchen</button>
         </form>
         <ul class="list-group">
             <li class="list-group-item" v-for="(buchung, index) in buchungen">

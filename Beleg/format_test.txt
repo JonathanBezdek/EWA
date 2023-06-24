@@ -1,0 +1,1 @@
+[{"w":"1","Name":"Penthouse mit Meerblick","Email":"poplutzp@gmail.com"},{"ID":"2","Name":"Zimmer mit Meerblick","Email":"dominik.weber@gmail.com"},{"ID":"3","Name":"Normales Zimmer","Email":"jonathan.bezdek@gmail.com"}]

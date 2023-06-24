@@ -15,6 +15,10 @@ let App = new Vue({
         }
     },
     methods: {
+        onSubmit: function (event) {
+            event.preventDefault(); // Verhindert das Standardverhalten des Browsers für Formularübermittlungen
+            this.insertData();
+        },
         fetchData() {
             fetch("data_calendar.json")
                 .then(response => response.json())
@@ -32,6 +36,25 @@ let App = new Vue({
                     console.log(this.zimmer);
                 });
         },
+
+        insertData: function (event) {
+            //event.preventDefault(); // verhindern Sie die Standardformularaktion
+            fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Insert.php', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'email': this.email
+                })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    $
+                    console.error(error);
+                });
+        },
+
         greet() {
             console.log(this.greeting)
         },
