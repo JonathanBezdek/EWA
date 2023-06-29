@@ -3,8 +3,6 @@
 $password = "em23en";
 
 
-
-
 // Verbindung herstellen
 $db_link = mysqli_connect ("localhost", "g08", $password ,"g08"); // change to your group Number twice !
 
@@ -12,10 +10,14 @@ if (!isset($_POST['email'])) {
     die("Error: email not provided");
 }
 
-$email = $_POST['email'];
-
-
-
+//$email = $_POST['email'];
+// NEU
+//$Buchungsnummer = $_POST[''];
+$Zimmer_ID = $_POST['zimmerID'];
+$Anreisedatum = $_POST['Anreisedatum'];
+$Abreisedatum = $_POST['Abreisedatum'];
+$Kundenemail = $_POST['email'];
+$Preis = $_POST['preis'];
 
 
 $db_link->query("SET NAMES 'utf8'"); 
@@ -29,7 +31,8 @@ if ($db_link === false) {
 }
 
 // SQL-Befehl vorbereiten
-$sql = "INSERT INTO zimmer VALUES('4', 'Test', '$email')";
+//                                        $Zimmer_ID'                                           $Preis
+$sql = "INSERT INTO buchungen VALUES('', '$Zimmer_ID', '$Anreisedatum', '$Abreisedatum', '$Kundenemail', '$Preis')";
 
 // SQL-Befehl ausführen
 if (mysqli_query($db_link, $sql)) {

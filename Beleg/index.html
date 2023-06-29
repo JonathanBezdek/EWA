@@ -10,30 +10,7 @@
 
 <body>
     <div id="app">
-        zimmer
-        <!-- 
-            dieses div gibt für jedes buch die Tabelle aus: 
-        -->
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="zimmer in zimmer" :key="zimmer.ID">
-                        <td>{{ zimmer.ID }}</td>
-                        <td>{{ zimmer.Name }}</td>
-                        <td>{{ zimmer.Email }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
+    
         <!-- 
         {{ greeting }}
         <input @keyup.enter="greet()" v-model="greeting">   instead of .enter also number 13, each number calls a key
@@ -50,7 +27,7 @@
 
         <div class="admin-section">
             <input id="admin-email" class="form-control" type="email" placeholder="Admin E-Mail" v-model="admin_email">
-            <button @click=login() type="submit" class="btn btn-primary btn-lg">Login</button>
+            <button @click.prevent=login() type="submit" class="btn btn-primary btn-lg">Login</button>
         </div>
 
         <h1>Hotelzimmer buchen</h1>
@@ -61,8 +38,8 @@
                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ selected.Name || 'Zimmer auswählen' }}</button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" v-for="zimmer in zimmer" @click="selectItem(zimmer)" href="#">
-                        {{zimmer.Name}}</a>
+                    <a class="dropdown-item" v-for="room in rooms" @click.prevent="selectItem(room)" href="#">
+                        {{room.Name}}</a>
                     <!-- mit v-for mehrere vond en gleichen elemnten erstellen-->
                 </div>
             </div>
@@ -71,17 +48,79 @@
             <input class="form-control" type="email" placeholder="E-Mail" v-model="email">
             <button @click="insertData" type="submit" class="btn btn-primary btn-lg">Buchen</button>
         </form>
-        <ul class="list-group">
+        <div class="search-bar">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                </div>
+            </nav>
+        </div>
+        <!-- <ul class="list-group">
             <li class="list-group-item" v-for="(buchung, index) in buchungen">
                 Anreisedatum: "{{ buchung.anreisedatum }}" ,
                 Abreisedatum: "{{ buchung.abreisedatum }}",
                 E-Mail: "{{ zimmer.Email }}"
             </li>
-        </ul>
+        </ul> -->
+        <div v-if="table_visible" class="tables">
+            <table>     <!--  Ausgabe Tabelle Zimmer -->
+                <thead>
+                    <tr>
+                        <th>Zimmer_ID</th>
+                        <th>Name</th>
+                        <th>Preis_pro_Nacht</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="room in rooms" :key="room.ID">
+                        <td>{{ room.Zimmer_ID }}</td>
+                        <td>{{ room.Name }}</td>
+                        <td>{{ room.Preis_pro_Nacht }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>     <!--  Ausgabe Tabelle Buchungen -->
+                <thead>
+                    <tr>
+                        <th>Buchungsnummer</th>
+                        <th>Zimmer_ID</th>
+                        <th>Anreisedatum</th>
+                        <th>Abreisedeatum</th>
+                        <th>Kundenemail</th>
+                        <th>Preis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="buchungen in buchungen" :key="buchungen.ID">
+                        <td>{{ buchungen.Buchungsnummer }}</td>
+                        <td>{{ buchungen.Zimmer_ID }}</td>
+                        <td>{{ buchungen.Anreisedatum }}</td>
+                        <td>{{ buchungen.Abreisedatum }}</td>
+                        <td>{{ buchungen.Kundenemail }}</td>
+                        <td>{{ buchungen.Preis }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>     <!--  Ausgabe Tabelle Admins -->
+                <thead>
+                    <tr>
+                        <th>Admin_Adressen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="admin in admins" :key="admins.Admin_Adressen">
+                        <td>{{ admin.Admin_Adressen }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <ul class="list-group">
             <li class="list-group-item">
                 Aktuell ausgewählt: (
-                Zimmer: "{{ selected.Name }}",
+                Room: "{{ selected.Name }}",
                 Anreisedatum: "{{ Anreisedatum }}" ,
                 Abreisedatum: "{{ Abreisedatum }}",
                 E-Mail: "{{ email }}" )
