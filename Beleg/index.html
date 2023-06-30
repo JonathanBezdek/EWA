@@ -10,7 +10,7 @@
 
 <body>
     <div id="app">
-    
+
         <!-- 
         {{ greeting }}
         <input @keyup.enter="greet()" v-model="greeting">   instead of .enter also number 13, each number calls a key
@@ -51,10 +51,12 @@
         <div class="search-bar">
             <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" v-model="Searchemail" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <button @click.prevent="SearchEmail" class="btn btn-outline-success"
+                            type="submit">Search</button>
+                    </form>
                 </div>
             </nav>
         </div>
@@ -65,8 +67,33 @@
                 E-Mail: "{{ zimmer.Email }}"
             </li>
         </ul> -->
+        <!--tabelle search-->
+
         <div v-if="table_visible" class="tables">
-            <table>     <!--  Ausgabe Tabelle Zimmer -->
+            <p v-if="searchResults.length === 0">Keine Suchergebnisse gefunden.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Buchungsnummer</th>
+                        <th>Zimmer_ID</th>
+                        <th>Anreisedatum</th>
+                        <th>Abreisedatum</th>
+                        <th>Kundenemail</th>
+                        <th>Preis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="result in searchResults" :key="result.Buchungsnummer">
+                        <td>{{ result.Buchungsnummer }}</td>
+                        <td>{{ result.Zimmer_ID }}</td>
+                        <td>{{ result.Anreisedatum }}</td>
+                        <td>{{ result.Abreisedatum }}</td>
+                        <td>{{ result.Kundenemail }}</td>
+                        <td>{{ result.Preis }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table> <!--  Ausgabe Tabelle Zimmer -->
                 <thead>
                     <tr>
                         <th>Zimmer_ID</th>
@@ -82,7 +109,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table>     <!--  Ausgabe Tabelle Buchungen -->
+            <table> <!--  Ausgabe Tabelle Buchungen -->
                 <thead>
                     <tr>
                         <th>Buchungsnummer</th>
@@ -104,7 +131,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table>     <!--  Ausgabe Tabelle Admins -->
+            <table> <!--  Ausgabe Tabelle Admins -->
                 <thead>
                     <tr>
                         <th>Admin_Adressen</th>

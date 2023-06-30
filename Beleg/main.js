@@ -2,22 +2,32 @@ let App = new Vue({
     el: '#app',
     data() {
         return {
-            rooms: [], // hier werden die bücher gespeichert
+            Searchemail: "",
+            searchResults: [],
+            searchQuery: "",
+            rooms: [],
             selected: { Zimmer_ID: "", name: "" },
+            selectedEmail: { kundenemail: "" },
             Anreisedatum: "",
             Abreisedatum: "",
             price: "",
+            kundenemail: "",
             greeting: 'Hello Vue 3!',
             isVisible: false,
             isVisible2: false,
+            searchtrue: true,
             email: "",
             admin_email: "",
             buchungen: [],
             admins: [],
-            table_visible: false
+            table_visible: true,
         }
     },
     methods: {
+        SearchEmail() {
+            console.log(this.Searchemail);
+            this.searchEmail();
+        },
         onSubmit: function (event) {
             event.preventDefault(); // Verhindert das Standardverhalten des Browsers für Formularübermittlungen
             this.insertData();
@@ -30,7 +40,7 @@ let App = new Vue({
             //     });
 
             // fetch für zimmer
-            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Dome/Beleg/Ausgabe_Zimmer.php")
+            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Ausgabe_Zimmer.php")
                 .then(response => {
                     console.log(response);
                     return response.json();
@@ -42,7 +52,7 @@ let App = new Vue({
                 });
 
             // fetch für buchungen
-            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Dome/Beleg/Ausgabe_Buchungen.php") 
+            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Ausgabe_Buchungen.php")
                 .then(response => {
                     console.log(response);
                     return response.json();
@@ -54,7 +64,7 @@ let App = new Vue({
                 });
 
             // fetch für admins
-            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Dome/Beleg/Ausgabe_Admins.php")
+            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Ausgabe_Admins.php")
                 .then(response => {
                     console.log(response);
                     return response.json();
@@ -64,11 +74,22 @@ let App = new Vue({
                     this.admins = data;
                     console.log(this.admins);
                 });
+
+            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Email_Suche.php")
+                .then(response => {
+                    console.log(response);
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    this.searchResults = data;
+                    console.log(this.searchResults);
+                });
         },
 
         insertData: function (event) {
             //event.preventDefault(); // verhindern Sie die Standardformularaktion
-            fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Dome/Beleg/Insert.php', {
+            fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Insert.php', {
                 method: 'POST',
                 body: new URLSearchParams({
                     'email': this.email,
@@ -86,7 +107,30 @@ let App = new Vue({
                     $
                     console.error(error);
                 });
-                this.getDays(this.Anreisedatum,this.Abreisedatum)
+            this.getDays(this.Anreisedatum, this.Abreisedatum)
+
+        },
+        searchEmail: function (event) {
+            //event.preventDefault(); // verhindern Sie die Standardformularaktion
+            fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Email_Suche.php', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'Buchungsnummer': this.Buchungsnummer,
+                    'Zimmer_ID': this.Zimmer_ID,
+                    'Anreisedatum': this.Anreisedatum,
+                    'Abreisedatum': this.Abreisedatum,
+                    'Kundenemail': this.Searchemail,
+                    'Preis': this.price
+                })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    $
+                    console.error(error);
+                });
         },
 
         greet() {
@@ -94,20 +138,22 @@ let App = new Vue({
             console.log("Das ist selected:")
             console.log(this.selected)
         },
-        
+
         getDate() {
             console.log("Anreisedatum: " + this.Anreisedatum)
             console.log("Abreisedatum: " + this.Abreisedatum)
             console.log("E-Mail: " + this.email)
             console.log(this.selected.Name)
         },
-        
+
         selectItem(room) {
             this.selected = room;
         },
-        
+        selectEmail(selectedEmail) {
+            this.selectedEmail = selectedEmail;
+        },
 
-        getDays(anreise, abreise){
+        getDays(anreise, abreise) {
             anreise = this.formatDate(anreise);
             abreise = this.formatDate(abreise);
 
@@ -125,7 +171,7 @@ let App = new Vue({
             this.getPrice(diffInDays);
         },
 
-        formatDate(date){
+        formatDate(date) {
             // Datum in ein JavaScript Date-Objekt konvertieren
             var dateObj = new Date(date);
 
@@ -136,11 +182,11 @@ let App = new Vue({
 
             // Führende Nullen hinzufügen
             if (tag < 10) {
-            tag = '0' + tag;
+                tag = '0' + tag;
             }
 
             if (monat < 10) {
-            monat = '0' + monat;
+                monat = '0' + monat;
             }
 
             // Datum im gewünschten Format zusammenstellen
@@ -150,7 +196,7 @@ let App = new Vue({
             return formatiertesDatum;
         },
 
-        getPrice(nights){
+        getPrice(nights) {
             this.price = this.selected.Preis_pro_Nacht * nights;
             console.log(this.price);
         },
