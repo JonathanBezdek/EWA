@@ -12,10 +12,12 @@ body {
     width: 100%;
     background: linear-gradient(180deg, rgb(23, 165, 242), rgb(49, 219, 179));
 }
+
 .container {
     display: flex;
     justify-content: space-between;
 }
+
 .box {
     padding: 20px;
     border: 1px solid;
@@ -43,22 +45,24 @@ body {
     background-color: rgb(90, 78, 78);
     display: flex;
     justify-content: space-around;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
 .calendar-form input {
-    width: 150px;
+    width: 200px;
 }
 
 .btn {
-    background-color:rgb(123, 209, 255)
+    background-color: rgb(123, 209, 255)
 }
+
 .dropdown-item {
     text-align: center;
 }
 
 .form-control {
+
     display: flex;
     text-align: center;
     align-items: center;
@@ -77,6 +81,7 @@ h1 {
     background-color: transparent;
     margin-top: 50px;
 }
+
 .list-group-item {
     font-weight: 600;
     font-size: 20px;
@@ -112,35 +117,36 @@ h1 {
     flex-direction: column;
     align-items: center;
 }
+
 table {
     margin-top: 50px;
     border-collapse: separate;
     border-spacing: 0;
-    }
-      
+}
+
 table td,
 table th {
     padding: 8px;
-    }
-      
+}
+
 table {
     border-radius: 40px;
-    }
+}
 
 table {
     background-color: #fff;
-    }
-      
+}
+
 thead {
     background-color: rgb(123, 209, 255);
     color: #fff;
-    }
-      
+}
+
 tbody {
     background-color: #f0f0f0;
-    }
-      
+}
+
 table td,
 table th {
     border: 1px solid #ccc;
-    }
+}

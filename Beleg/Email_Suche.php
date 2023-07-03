@@ -14,7 +14,7 @@ $db_link->query("SET CHARACTER SET utf8");
 $db_link->query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 // ##########################################################################
 
-$email = $_POST['Kundenemail'];
+$email = $_POST['emailEingabe'];
  
 $sql = "SELECT * FROM buchungen WHERE Kundenemail LIKE '$email'";
  
@@ -34,9 +34,12 @@ while ($zeile =  $db_erg->fetch_array( MYSQLI_ASSOC ))
  
 if ($showtable)
 {echo "<tr>";
-  echo "<td>". $zeile['ID'] . "</td>";
-  echo "<td>". $zeile['Name'] . "</td>";
-  echo "<td>". $zeile['Email'] . "</td>";
+  echo "<td>". $zeile['Buchungsnummer'] . "</td>";
+  echo "<td>". $zeile['Zimmer_ID'] . "</td>";
+  echo "<td>". $zeile['Anreisedatum'] . "</td>";
+  echo "<td>". $zeile['Abreisedatum'] . "</td>";
+  echo "<td>". $zeile['Kundenemail'] . "</td>";
+  echo "<td>". $zeile['Preis'] . "</td>";
   echo "</tr>";
   } 
   

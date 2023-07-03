@@ -2,6 +2,8 @@ let App = new Vue({
     el: '#app',
     data() {
         return {
+            filtervisible: false,
+            emailPlaceholder: "",
             Searchemail: "",
             searchResults: [],
             searchQuery: "",
@@ -12,21 +14,17 @@ let App = new Vue({
             Abreisedatum: "",
             price: "",
             kundenemail: "",
-            greeting: 'Hello Vue 3!',
-            isVisible: false,
-            isVisible2: false,
-            searchtrue: true,
             email: "",
             admin_email: "",
             buchungen: [],
             admins: [],
-            table_visible: true,
+            table_visible: false,
         }
     },
     methods: {
-        SearchEmail() {
-            console.log(this.Searchemail);
-            this.searchEmail();
+        changePlaceholder() {
+            this.getDays(this.Anreisedatum, this.Abreisedatum);
+            this.emailPlaceholder = 'Gesamtpreis: ' + this.price + "€";
         },
         onSubmit: function (event) {
             event.preventDefault(); // Verhindert das Standardverhalten des Browsers für Formularübermittlungen
@@ -72,22 +70,24 @@ let App = new Vue({
                 .then((data) => {
                     console.log(data);
                     this.admins = data;
+                    console.log('admins: ');
                     console.log(this.admins);
                 });
 
-            fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Email_Suche.php")
-                .then(response => {
-                    console.log(response);
-                    return response.json();
-                })
-                .then((data) => {
-                    console.log(data);
-                    this.searchResults = data;
-                    console.log(this.searchResults);
-                });
+            // fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Email_Suche.php")
+            //     .then(response => {
+            //         console.log(response);
+            //         return response.json();
+            //     })
+            //     .then((data) => {
+            //         console.log(data);
+            //         this.searchResults = data;
+            //         console.log(this.searchResults);
+            //     });
         },
 
         insertData: function (event) {
+            this.getDays(this.Anreisedatum, this.Abreisedatum);
             //event.preventDefault(); // verhindern Sie die Standardformularaktion
             fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Insert.php', {
                 method: 'POST',
@@ -96,8 +96,9 @@ let App = new Vue({
                     'Anreisedatum': this.Anreisedatum,
                     'Abreisedatum': this.Abreisedatum,
                     'zimmerID': this.selected.Zimmer_ID,
-                    'preis': this.price
+                    'preis': this.price,
                 })
+
             })
                 .then(response => response.text())
                 .then(data => {
@@ -107,38 +108,29 @@ let App = new Vue({
                     $
                     console.error(error);
                 });
-            this.getDays(this.Anreisedatum, this.Abreisedatum)
-
+            console.log(this.price);
         },
-        searchEmail: function (event) {
-            //event.preventDefault(); // verhindern Sie die Standardformularaktion
+        searchEmail() {
+
+            console.log(this.filtervisible);
+            this.filtervisible = true;
+            console.log("danach: " + this.filtervisible);
             fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Email_Suche.php', {
                 method: 'POST',
                 body: new URLSearchParams({
-                    'Buchungsnummer': this.Buchungsnummer,
-                    'Zimmer_ID': this.Zimmer_ID,
-                    'Anreisedatum': this.Anreisedatum,
-                    'Abreisedatum': this.Abreisedatum,
-                    'Kundenemail': this.Searchemail,
-                    'Preis': this.price
+                    'emailEingabe': this.Searchemail,
                 })
             })
-                .then(response => response.text())
+
+                .then(response => response.json())
                 .then(data => {
+                    console.log('emails:');
                     console.log(data);
+                    this.searchResults = data;
+                    console.log(this.searchResults.length);
                 })
-                .catch(error => {
-                    $
-                    console.error(error);
-                });
-        },
 
-        greet() {
-            console.log(this.room)
-            console.log("Das ist selected:")
-            console.log(this.selected)
         },
-
         getDate() {
             console.log("Anreisedatum: " + this.Anreisedatum)
             console.log("Abreisedatum: " + this.Abreisedatum)
@@ -195,11 +187,11 @@ let App = new Vue({
             // Ergebnis anzeigen
             return formatiertesDatum;
         },
-
         getPrice(nights) {
             this.price = this.selected.Preis_pro_Nacht * nights;
-            console.log(this.price);
+            return this.price;
         },
+
 
         login() {
             for (let i = 0; i < this.admins.length; i++) {
@@ -214,4 +206,3 @@ let App = new Vue({
         this.fetchData();
     },
 });
-
