@@ -7,10 +7,11 @@
     font-family: 'Poppins', sans-serif;
 }
 
+
 body {
     height: 100vh;
     width: 100%;
-    background: linear-gradient(180deg, rgb(23, 165, 242), rgb(49, 219, 179));
+    background: linear-gradient(180deg, rgb(7, 161, 244), rgb(7, 229, 177));
 }
 
 .container {
@@ -39,9 +40,31 @@ body {
 
 }
 
+.aria-label {
+    margin-bottom: .5em;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: larger;
+    /* text-transform: uppercase; */
+    text-align: center;
+    grid-column: span 2;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
 .calendar-form {
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
     background-color: rgb(90, 78, 78);
     display: flex;
     justify-content: space-around;
@@ -54,15 +77,15 @@ body {
 }
 
 .btn {
-    background-color: rgb(123, 209, 255)
+    margin-top: 20px;
+    background-color: rgb(123, 209, 255);
 }
 
 .dropdown-item {
-    text-align: center;
+    text-align: left;
 }
 
 .form-control {
-
     display: flex;
     text-align: center;
     align-items: center;
