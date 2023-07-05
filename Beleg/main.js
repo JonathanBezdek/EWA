@@ -21,6 +21,11 @@ let App = new Vue({
             table_visible: false,
         }
     },
+    computed: {
+        isValid: function () {
+            return this.email && this.Anreisedatum && this.Abreisedatum && this.selected;
+        }
+    },
     methods: {
         changePlaceholder() {
             this.getDays(this.Anreisedatum, this.Abreisedatum);
@@ -87,8 +92,10 @@ let App = new Vue({
         },
 
         insertData: function (event) {
+
             this.getDays(this.Anreisedatum, this.Abreisedatum);
-            //event.preventDefault(); // verhindern Sie die Standardformularaktion
+            alert("Buchung erfolgreich");
+            //   event.preventDefault(); // verhindern Sie die Standardformularaktion
             fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Insert.php', {
                 method: 'POST',
                 body: new URLSearchParams({
@@ -98,7 +105,6 @@ let App = new Vue({
                     'zimmerID': this.selected.Zimmer_ID,
                     'preis': this.price,
                 })
-
             })
                 .then(response => response.text())
                 .then(data => {

@@ -46,12 +46,13 @@
                     <!-- mit v-for mehrere vond en gleichen elemnten erstellen-->
                 </div>
             </div>
-            <input class="form-control" type="date" v-model="Anreisedatum">
-            <input class="form-control" type="date" v-model="Abreisedatum" @change="changePlaceholder">
-            <input class="form-control" type="email" placeholder="E-Mail" v-model="email">
-            <input class="form-control" type="text" :placeholder="emailPlaceholder" readonly>
+            <input class="form-control" type="date" v-model="Anreisedatum" required>
+            <input class="form-control" type="date" v-model="Abreisedatum" @change="changePlaceholder" required>
+            <input class="form-control" type="email" placeholder="E-Mail" v-model="email" required>
+            <input class="form-control" type="text" :placeholder="emailPlaceholder" readonly required>
             <!--<div class="form-control">Preis pro Nacht: {{selected.Preis_pro_Nacht}}</div>-->
-            <button @click.prevent="insertData" type="submit" class="btn btn-primary btn-lg">Buchen</button>
+            <button @click.prevent="insertData" type="submit" class="btn btn-primary btn-lg"
+                :disabled="!isValid">Buchen</button>
         </form>
         <div class="search-bar" v-if="table_visible">
             <nav class="navbar bg-body-tertiary">
