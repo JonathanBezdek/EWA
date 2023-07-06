@@ -73,9 +73,12 @@ body {
 }
 
 .calendar-form input {
-    width: 200px;
+    width: 180px;
 }
 
+.btn-lg {
+    margin-top: 20px;
+}
 .btn {
     margin-top: 20px;
     background-color: rgb(123, 209, 255);

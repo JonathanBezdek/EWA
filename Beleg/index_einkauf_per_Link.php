@@ -17,7 +17,7 @@ include 'books.php';
 </head>
 <body>
 
-<h1>Bookstore</h1>
+<h1>Hotelreservierung</h1>
 
 <hr>
 <?php
@@ -27,7 +27,8 @@ echo  "<tr><td>Buch</td>  <td> Preis in Cent </td>   <td>Kaufen über  </td> <td
 foreach ($books as $book) {
     echo "<tr><td><b>Buch '". $book['name'] .  "</td> <td>" .  $book['amount'] . "</td>";
     echo "<td><a href='stripe_redirect.php?live=0&bookId=".$i."'> eigenen Stripe-Account </a> </td>";
-    echo "<td><a href='stripe_redirect.php?live=1&bookId=".$i."'> Grosshaendler (bei Abnahme) </a> </td>";
+    echo "<td><a href='stripe_redi
+    rect.php?live=1&bookId=".$i."'> Grosshaendler (bei Abnahme) </a> </td>";
     $i++;
     echo "</tr>"; 
 	}

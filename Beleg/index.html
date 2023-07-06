@@ -27,7 +27,8 @@
             </div>
         </header>
         <main>
-            <form id="myForm" class="calendar-form">
+            <!-- action="/ewa/g08/Beleg/Standalone_stripe_redirect.php" -->
+            <form id="myForm" class="calendar-form" action="/ewa/g08/Beleg/Standalone_stripe_redirect.php">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle btn btn-primary btn-lg" type="button"
                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,7 +43,8 @@
                 <div class="form-container">
                     <div class="input-container">
                         <label class="aria-label" for="anreise">Anreisedatum</label>
-                        <input id="anreise" class="form-control" type="date" v-model="Anreisedatum" required>
+                        <input id="anreise" class="form-control" type="date" v-model="Anreisedatum"
+                            @change="changePlaceholder" required>
                     </div>
                     <div class="input-container">
                         <label class="aria-label" for="abreise">Abreisedatum</label>
@@ -55,7 +57,7 @@
                             v-model="email" required>
                     </div>
                     <div class="input-container">
-                        <label class="aria-label" for="gesamtpreis">Gesamtpreis</label>
+                        <label class="aria-label" name="gesamtpreis" for="gesamtpreis">Gesamtpreis</label>
                         <input id="gesamtpreis" class="form-control" type="text" :placeholder="emailPlaceholder"
                             readonly required>
                     </div>

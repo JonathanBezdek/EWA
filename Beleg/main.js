@@ -2,6 +2,7 @@ let App = new Vue({
     el: '#app',
     data() {
         return {
+            diffInMilliseconds: "",
             filtervisible: false,
             emailPlaceholder: "",
             Searchemail: "",
@@ -23,24 +24,26 @@ let App = new Vue({
     },
     computed: {
         isValid: function () {
-            return this.email && this.Anreisedatum && this.Abreisedatum && this.selected;
+            if (this.diffInMilliseconds > 0) {
+                return this.email && this.Anreisedatum && this.Abreisedatum && this.selected;
+            }
+
         }
     },
     methods: {
         changePlaceholder() {
             this.getDays(this.Anreisedatum, this.Abreisedatum);
-            this.emailPlaceholder = 'Gesamtpreis: ' + this.price + "€";
+
+            if (this.price > 0) {
+                this.emailPlaceholder = 'Gesamtpreis: ' + this.price + "€";
+            }
+
         },
         onSubmit: function (event) {
             event.preventDefault(); // Verhindert das Standardverhalten des Browsers für Formularübermittlungen
             this.insertData();
         },
         fetchData() {
-            // fetch("data_calendar.json")
-            //     .then(response => response.json())
-            //     .then((data) => {
-            //         this.buchungen = data.buchungen;
-            //     });
 
             // fetch für zimmer
             fetch("https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Ausgabe_Zimmer.php")
@@ -94,13 +97,16 @@ let App = new Vue({
         insertData: function (event) {
 
             this.getDays(this.Anreisedatum, this.Abreisedatum);
+
+
             alert("Buchung erfolgreich");
-            //   event.preventDefault(); // verhindern Sie die Standardformularaktion
+
             fetch('https://ivm108.informatik.htw-dresden.de/ewa/g08/Beleg/Insert.php', {
                 method: 'POST',
                 body: new URLSearchParams({
                     'email': this.email,
                     'Anreisedatum': this.Anreisedatum,
+
                     'Abreisedatum': this.Abreisedatum,
                     'zimmerID': this.selected.Zimmer_ID,
                     'preis': this.price,
@@ -114,7 +120,11 @@ let App = new Vue({
                     $
                     console.error(error);
                 });
-            console.log(this.price);
+
+            if (this.isValid) {
+
+                document.getElementById('myForm').submit();
+            }
         },
         searchEmail() {
 
@@ -137,6 +147,7 @@ let App = new Vue({
                 })
 
         },
+
         getDate() {
             console.log("Anreisedatum: " + this.Anreisedatum)
             console.log("Abreisedatum: " + this.Abreisedatum)
@@ -160,10 +171,14 @@ let App = new Vue({
             var dateObj2 = new Date(abreise);
 
             // Unterschied in Millisekunden berechnen
-            var diffInMilliseconds = Math.abs(dateObj2 - dateObj1);
+
+            this.diffInMilliseconds = dateObj2 - dateObj1;
+            if (this.diffInMilliseconds < 0) {
+                alert("Datum in der Vergangenheit!");
+            }
 
             // Unterschied in NÄCHTEN (deshalb -1)
-            var diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+            var diffInDays = Math.ceil(this.diffInMilliseconds / (1000 * 60 * 60 * 24));
 
             // Ergebnis anzeigen
             this.getPrice(diffInDays);
@@ -195,7 +210,10 @@ let App = new Vue({
         },
         getPrice(nights) {
             this.price = this.selected.Preis_pro_Nacht * nights;
+
             return this.price;
+
+
         },
 
 
