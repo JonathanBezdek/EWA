@@ -2,6 +2,7 @@ let App = new Vue({
     el: '#app',
     data() {
         return {
+            dateObj1: "",
             diffInMilliseconds: "",
             filtervisible: false,
             emailPlaceholder: "",
@@ -34,6 +35,13 @@ let App = new Vue({
         changePlaceholder() {
             this.getDays(this.Anreisedatum, this.Abreisedatum);
 
+            let jetzt = Date.now();
+            console.log("anreise:" + this.dateObj1.getTime());
+            console.log("jetzt:" + jetzt);
+
+            if ((this.dateObj1.getTime() + 86400000) < jetzt) {
+                alert("Datum liegt in der Vergangenheit!");
+            }
             if (this.price > 0) {
                 this.emailPlaceholder = 'Gesamtpreis: ' + this.price + "€";
             }
@@ -167,12 +175,12 @@ let App = new Vue({
             abreise = this.formatDate(abreise);
 
             // Datum in JavaScript Date-Objekte konvertieren
-            var dateObj1 = new Date(anreise);
+            this.dateObj1 = new Date(anreise);
             var dateObj2 = new Date(abreise);
 
             // Unterschied in Millisekunden berechnen
 
-            this.diffInMilliseconds = dateObj2 - dateObj1;
+            this.diffInMilliseconds = dateObj2 - this.dateObj1;
             if (this.diffInMilliseconds < 0) {
                 alert("Datum in der Vergangenheit!");
             }

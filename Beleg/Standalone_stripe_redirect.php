@@ -10,9 +10,9 @@ $test = [
     [
         'price_data' => [
             'currency' => 'eur',
-            'unit_amount' => 23423,
+            'unit_amount' => 230000,
             'product_data' => [
-                'name' => 'Test-Buch',
+                'name' => 'Zimmer mit Meerblick',
             ],
         ],
         'quantity' => 1,

@@ -32,7 +32,7 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle btn btn-primary btn-lg" type="button"
                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ selected.Name || 'Zimmer auswählen' }} {{ selected.Preis_pro_Nacht }}
+                        {{ selected.Name || 'Zimmer auswählen' }}
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" v-for="room in rooms" @click.prevent="selectItem(room)" href="#">
